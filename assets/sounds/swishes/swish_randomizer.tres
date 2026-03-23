@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://4cxndxbjkpdu"]
+
+[ext_resource type="AudioStream" uid="uid://d27od88b8s8c7" path="res://assets/sounds/swishes/swish-1.wav" id="1_mgkxo"]
+[ext_resource type="AudioStream" uid="uid://cm2o886e2oasl" path="res://assets/sounds/swishes/swish-2.wav" id="2_rp2fe"]
+[ext_resource type="AudioStream" uid="uid://bjxmn1dkwdw0k" path="res://assets/sounds/swishes/swish-3.wav" id="3_4r8ld"]
+[ext_resource type="AudioStream" uid="uid://hx3674p28er8" path="res://assets/sounds/swishes/swish-4.wav" id="4_mqh0l"]
+[ext_resource type="AudioStream" uid="uid://ds8f04vhidsd7" path="res://assets/sounds/swishes/swish-5.wav" id="5_buwdu"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("1_mgkxo")
+stream_1/stream = ExtResource("2_rp2fe")
+stream_2/stream = ExtResource("3_4r8ld")
+stream_3/stream = ExtResource("4_mqh0l")
+stream_4/stream = ExtResource("5_buwdu")

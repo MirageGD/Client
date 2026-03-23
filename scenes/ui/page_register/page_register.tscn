@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://dhm5uw575wilx"]
+
+[ext_resource type="Script" uid="uid://cv8a4ugj61hvi" path="res://scenes/ui/page_register/page_register.gd" id="1_edsmc"]
+
+[node name="PageRegister" type="Control" unique_id=968722029]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_edsmc")
+
+[node name="Background" type="ColorRect" parent="." unique_id=370595044]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1507235995]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -59.0
+offset_right = 152.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="MarginHeader" type="MarginContainer" parent="VBoxContainer" unique_id=420162974]
+layout_mode = 2
+theme_override_constants/margin_bottom = 25
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginHeader" unique_id=611463909]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.76429045, 0.73212045, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Register"
+horizontal_alignment = 1
+
+[node name="MarginEmail" type="MarginContainer" parent="VBoxContainer" unique_id=720877388]
+layout_mode = 2
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainerEmail" type="HBoxContainer" parent="VBoxContainer/MarginEmail" unique_id=1109261591]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AccountLabel" type="Label" parent="VBoxContainer/MarginEmail/HBoxContainerEmail" unique_id=1168284971]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Account Name"
+horizontal_alignment = 2
+
+[node name="AccountLineEdit" type="LineEdit" parent="VBoxContainer/MarginEmail/HBoxContainerEmail" unique_id=1356012131]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+max_length = 25
+editable = false
+
+[node name="HBoxContainerPassword" type="HBoxContainer" parent="VBoxContainer" unique_id=1152079067]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PasswordLabel" type="Label" parent="VBoxContainer/HBoxContainerPassword" unique_id=1596159909]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Password"
+horizontal_alignment = 2
+
+[node name="PasswordLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainerPassword" unique_id=1043645573]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+editable = false
+secret = true
+
+[node name="HBoxContainerRepeatPassword" type="HBoxContainer" parent="VBoxContainer" unique_id=675617829]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RepeatPasswordLabel" type="Label" parent="VBoxContainer/HBoxContainerRepeatPassword" unique_id=770352061]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Repeat Password"
+horizontal_alignment = 2
+
+[node name="RepeatPasswordLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainerRepeatPassword" unique_id=1764170946]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+editable = false
+secret = true
+
+[node name="MarginRegister" type="MarginContainer" parent="VBoxContainer" unique_id=940291207]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_top = 5
+
+[node name="RegisterButton" type="Button" parent="VBoxContainer/MarginRegister" unique_id=1242825602]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+disabled = true
+text = "Register"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=2034062224]
+layout_mode = 2
+theme_override_constants/margin_top = 35
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=191600783]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer" unique_id=676021414]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Already have an account?"
+
+[node name="LoginLinkButton" type="LinkButton" parent="VBoxContainer/MarginContainer/HBoxContainer" unique_id=1584293739]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Login"
+
+[node name="HTTP" type="HTTPRequest" parent="." unique_id=1997630466]
+unique_name_in_owner = true
+
+[connection signal="text_changed" from="VBoxContainer/MarginEmail/HBoxContainerEmail/AccountLineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="VBoxContainer/MarginEmail/HBoxContainerEmail/AccountLineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainerPassword/PasswordLineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="VBoxContainer/HBoxContainerPassword/PasswordLineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainerRepeatPassword/RepeatPasswordLineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="VBoxContainer/HBoxContainerRepeatPassword/RepeatPasswordLineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="VBoxContainer/MarginRegister/RegisterButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/LoginLinkButton" to="." method="_on_login_link_button_pressed"]
+[connection signal="request_completed" from="HTTP" to="." method="_on_http_request_completed"]

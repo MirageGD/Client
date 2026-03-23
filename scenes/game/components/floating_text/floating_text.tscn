@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bby151ii05ft5"]
+
+[ext_resource type="Script" uid="uid://bjdxiceepqxok" path="res://scenes/game/components/floating_text/floating_text.gd" id="1_ox0gp"]
+
+[node name="FloatingText" type="Node2D" unique_id=588461085]
+script = ExtResource("1_ox0gp")

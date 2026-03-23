@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://klp2wjh5bx5o"]
+
+[ext_resource type="Script" uid="uid://bakm8v501pvnx" path="res://scenes/ui/box_alert/box_alert.gd" id="1_66cgb"]
+
+[node name="BoxAlert" type="Control" unique_id=940930107]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_66cgb")
+
+[node name="Background" type="ColorRect" parent="." unique_id=417873791]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.89411765)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1627657183]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Center" unique_id=864249120]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Message" type="Label" parent="Center/VBoxContainer" unique_id=143370152]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Lorem ipsum dolor sit amet."
+
+[node name="Button" type="Button" parent="Center/VBoxContainer" unique_id=742078976]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 14
+text = "Close"
+
+[connection signal="pressed" from="Center/VBoxContainer/Button" to="." method="_on_button_pressed"]

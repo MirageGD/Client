@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://vfiguc0irvsf"]
+
+[ext_resource type="Script" uid="uid://wvbp583vae3r" path="res://scenes/game/game.gd" id="1_sul5r"]
+[ext_resource type="PackedScene" uid="uid://b4t8g3q2oljmq" path="res://scenes/game/ui/panel_chat/panel_chat.tscn" id="2_7h61r"]
+[ext_resource type="PackedScene" uid="uid://ctjbmgj6sipvp" path="res://scenes/game/ui/panel_vitals/panel_vitals.tscn" id="3_0sr1o"]
+
+[node name="Game" type="Node2D" unique_id=1090578033]
+y_sort_enabled = true
+script = ExtResource("1_sul5r")
+
+[node name="GUI" type="CanvasLayer" parent="." unique_id=1602178758]
+
+[node name="PanelChat" parent="GUI" unique_id=1949857586 instance=ExtResource("2_7h61r")]
+offset_top = -200.0
+
+[node name="PanelVitals" parent="GUI" unique_id=1654518891 instance=ExtResource("3_0sr1o")]
