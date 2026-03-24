@@ -3,13 +3,12 @@ class_name PageRegister
 
 const MIN_ACCOUNT_NAME_LENGTH := 5
 
-const REGISTER_URL := "http://localhost:5000/api/v1/register"
-
 @onready var _edit_account: LineEdit = %AccountLineEdit
 @onready var _edit_password: LineEdit = %PasswordLineEdit
 @onready var _edit_repeat_password: LineEdit = %RepeatPasswordLineEdit
 @onready var _button_register: Button = %RegisterButton
 @onready var _http: HTTPRequest = %HTTP
+@onready var _register_url: String = ProjectSettings.get_setting("mirage/server/address") + "register"
 
 func _ready() -> void:
 	_set_enabled(true)
@@ -54,7 +53,7 @@ func _submit() -> void:
 		"password": password
 	}
 	
-	_http.request(REGISTER_URL, ["Content-Type: application/json"], HTTPClient.METHOD_POST, JSON.stringify(body))
+	_http.request(_register_url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, JSON.stringify(body))
 
 func _on_register_ok(json: PackedByteArray) -> void:
 	var body = JSON.parse_string(json.get_string_from_utf8())

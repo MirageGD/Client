@@ -3,8 +3,6 @@ class_name PageCharacterList
 
 const BOX_CONFIRM = preload("uid://cowe8deq5x26c")
 
-const CHARACTERS_URL := "http://localhost:5000/api/v1/characters"
-
 @onready var _character_list: ItemList = %CharacterList
 @onready var _button_new: Button = %ButtonNew
 @onready var _button_delete: Button = %ButtonDelete
@@ -12,6 +10,7 @@ const CHARACTERS_URL := "http://localhost:5000/api/v1/characters"
 @onready var _http_list: HTTPRequest = %HTTPList
 @onready var _http_delete: HTTPRequest = %HTTPDelete
 @onready var _http_get_token: HTTPRequest = %HTTPGetToken
+@onready var _characters_url: String = ProjectSettings.get_setting("mirage/server/address") + "characters"
 
 var _characters: Array[String]
 
@@ -58,7 +57,7 @@ func _fetch_character_list() -> void:
 		"Authorization: Bearer " + Session.auth_token
 	]
 	
-	_http_list.request(CHARACTERS_URL, headers)
+	_http_list.request(_characters_url, headers)
 
 func _delete_character(index: int) -> void:
 	if index >= _characters.size():
@@ -69,7 +68,7 @@ func _delete_character(index: int) -> void:
 		"Authorization: Bearer " + Session.auth_token
 	]
 	
-	var url := CHARACTERS_URL + "/" + _characters[index]
+	var url := _characters_url + "/" + _characters[index]
 	
 	_http_delete.request(url, headers, HTTPClient.METHOD_DELETE)
 
@@ -82,7 +81,7 @@ func _select_character(index: int) -> void:
 		"Authorization: Bearer " + Session.auth_token
 	]
 	
-	var url := CHARACTERS_URL + "/" + _characters[index] + "/token"
+	var url := _characters_url + "/" + _characters[index] + "/token"
 	
 	_http_get_token.request(url, headers)
 

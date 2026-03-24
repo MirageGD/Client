@@ -65,6 +65,10 @@ attack={
 ]
 }
 
+[mirage]
+
+server/address="http://localhost:5000/api/v1/"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

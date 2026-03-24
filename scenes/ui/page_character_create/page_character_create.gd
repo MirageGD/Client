@@ -3,12 +3,11 @@ class_name PageCharacterCreate
 
 const MIN_CHARACTER_NAME_LENGTH: int = 5
 
-const CREATE_CHARACTER_URL := "http://localhost:5000/api/v1/characters"
-
 @onready var _edit_character_name: LineEdit = %CharacterNameLineEdit
 @onready var _button_create: Button = %ButtonCreate
 @onready var _button_cancel: Button = %ButtonCancel
 @onready var _http: HTTPRequest = %HTTP
+@onready var _characters_url: String = ProjectSettings.get_setting("mirage/server/address") + "characters"
 
 func _ready() -> void:
 	_set_enabled(true)
@@ -49,7 +48,7 @@ func _submit() -> void:
 		"characterName": character_name
 	}
 	
-	_http.request(CREATE_CHARACTER_URL, headers, HTTPClient.METHOD_POST, JSON.stringify(body))
+	_http.request(_characters_url, headers, HTTPClient.METHOD_POST, JSON.stringify(body))
 
 func _on_error(error_message: String) -> void:
 	SignalBus.critical_error.emit(error_message)

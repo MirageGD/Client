@@ -1,16 +1,18 @@
 extends Node
 
-const GAME_URL := "ws://localhost:5000/api/v1/game"
-
 signal connected
 signal disconnected(code: int, reason: String)
 signal message(type: String, payload: Dictionary)
+
+@onready var _game_url: String = ProjectSettings.get_setting("mirage/server/address") + "game"
 
 var _socket := WebSocketPeer.new()
 var _active := false
 var _last_state := WebSocketPeer.STATE_CLOSED
 
 func _ready() -> void:
+	_game_url = _game_url.replace("https://", "wss://").replace("http://", "ws://")
+	
 	disconnected.connect(func(_code: int, _reason: String) -> void:
 		SignalBus.goto_login.emit()
 		SignalBus.critical_error.emit(
@@ -18,7 +20,7 @@ func _ready() -> void:
 		))
 
 func connect_to_server(token: String) -> void:
-	var url = GAME_URL + "/" + token
+	var url = _game_url + "/" + token
 	
 	var err := _socket.connect_to_url(url, TLSOptions.client())
 	if err != OK:

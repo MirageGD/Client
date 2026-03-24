@@ -3,12 +3,11 @@ class_name PageLogin
 
 const MIN_ACCOUNT_NAME_LENGTH := 5
 
-const LOGIN_URL := "http://localhost:5000/api/v1/auth"
-
 @onready var _edit_account: LineEdit = %AccountLineEdit
 @onready var _edit_password: LineEdit = %PasswordLineEdit
 @onready var _button_login: Button = %LoginButton
 @onready var _http: HTTPRequest = %HTTP
+@onready var _login_url: String = ProjectSettings.get_setting("mirage/server/address") + "auth"
 
 func _ready() -> void:
 	_set_enabled(true)
@@ -49,7 +48,7 @@ func _submit() -> void:
 		"password": password
 	}
 	
-	_http.request(LOGIN_URL, ["Content-Type: application/json"], HTTPClient.METHOD_POST, JSON.stringify(body))
+	_http.request(_login_url, ["Content-Type: application/json"], HTTPClient.METHOD_POST, JSON.stringify(body))
 
 func _on_login_ok(json: PackedByteArray) -> void:
 	var body = JSON.parse_string(json.get_string_from_utf8())
