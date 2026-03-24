@@ -7,7 +7,7 @@ const MIN_ACCOUNT_NAME_LENGTH := 5
 @onready var _edit_password: LineEdit = %PasswordLineEdit
 @onready var _button_login: Button = %LoginButton
 @onready var _http: HTTPRequest = %HTTP
-@onready var _login_url: String = ProjectSettings.get_setting("mirage/server/address") + "auth"
+@onready var _login_url: String = ProjectSettings.get_setting("mirage/server/address") + "api/v1/auth"
 
 func _ready() -> void:
 	_set_enabled(true)

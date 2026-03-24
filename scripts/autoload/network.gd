@@ -4,7 +4,7 @@ signal connected
 signal disconnected(code: int, reason: String)
 signal message(type: String, payload: Dictionary)
 
-@onready var _game_url: String = ProjectSettings.get_setting("mirage/server/address") + "game"
+@onready var _game_url: String = ProjectSettings.get_setting("mirage/server/address") + "api/v1/game"
 
 var _socket := WebSocketPeer.new()
 var _active := false

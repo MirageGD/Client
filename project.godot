@@ -67,7 +67,7 @@ attack={
 
 [mirage]
 
-server/address="http://localhost:5000/api/v1/"
+server/address="https://auth.mysticarealms.dev/"
 
 [physics]
 

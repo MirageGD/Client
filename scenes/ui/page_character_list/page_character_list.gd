@@ -10,7 +10,7 @@ const BOX_CONFIRM = preload("uid://cowe8deq5x26c")
 @onready var _http_list: HTTPRequest = %HTTPList
 @onready var _http_delete: HTTPRequest = %HTTPDelete
 @onready var _http_get_token: HTTPRequest = %HTTPGetToken
-@onready var _characters_url: String = ProjectSettings.get_setting("mirage/server/address") + "characters"
+@onready var _characters_url: String = ProjectSettings.get_setting("mirage/server/address") + "api/v1/characters"
 
 var _characters: Array[String]
 

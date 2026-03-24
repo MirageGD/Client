@@ -1,7 +1,6 @@
 extends Node2D
 class_name Entity
 
-const CONTENT_URL := "http://127.0.0.1:5000/content/"
 const CONTENT_CACHE_DIR := "user://content_cache/"
 
 @onready var _sprite: Sprite2D = %Sprite
@@ -11,6 +10,7 @@ const CONTENT_CACHE_DIR := "user://content_cache/"
 @onready var _sound_level_up: AudioStreamPlayer2D = $SoundLevelUp
 @onready var _floating_text: Node2D = %FloatingText
 @onready var _label_name: Label = %NameLabel
+@onready var _content_url: String = ProjectSettings.get_setting("mirage/server/address") + "content/"
 
 var is_local_player := false
 var entity_name: String
@@ -41,7 +41,7 @@ func _load_sprite() -> void:
 		return
 	
 	var sprite_local_path := CONTENT_CACHE_DIR.path_join(sprite_path)
-	var sprite_url := CONTENT_URL + sprite_path
+	var sprite_url := _content_url + sprite_path
 	
 	if not await ContentDownloader.download(sprite_url, sprite_local_path):
 		return

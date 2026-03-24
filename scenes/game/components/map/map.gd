@@ -1,7 +1,6 @@
 extends Node2D
 class_name Map
 
-const CONTENT_URL := "http://127.0.0.1:5000/content/"
 const CONTENT_CACHE_DIR := "user://content_cache/"
 
 enum {
@@ -12,6 +11,7 @@ enum {
 signal map_loaded
 
 @onready var _layers: Node2D = %Layers
+@onready var _content_url: String = ProjectSettings.get_setting("mirage/server/address") + "content/"
 
 var _tileset_cache: Dictionary = {}
 var _tiles: Array[int]
@@ -31,7 +31,7 @@ func load_map(map_name: String) -> void:
 	clear()
 	
 	var local_path := CONTENT_CACHE_DIR.path_join(map_name)
-	var ok: bool = await ContentDownloader.download(CONTENT_URL + map_name, local_path)
+	var ok: bool = await ContentDownloader.download(_content_url + map_name, local_path)
 	if not ok:
 		push_error("[Map] failed to download map '%s'" % map_name)
 		return
@@ -216,7 +216,7 @@ func _get_tileset(map_path: String, tileset_source: String) -> Variant:
 	
 	var tileset_path := map_path.path_join(tileset_source).simplify_path()
 	var tileset_local_path := CONTENT_CACHE_DIR.path_join(tileset_path)
-	var ok: bool = await ContentDownloader.download(CONTENT_URL + tileset_path, tileset_local_path)
+	var ok: bool = await ContentDownloader.download(_content_url + tileset_path, tileset_local_path)
 	if not ok:
 		return null
 	
@@ -227,7 +227,7 @@ func _get_tileset(map_path: String, tileset_source: String) -> Variant:
 	var image_path = tileset_path.get_base_dir().path_join(image_name).simplify_path()
 	var image_local_path = CONTENT_CACHE_DIR.path_join(image_path)
 	
-	ok = await ContentDownloader.download(CONTENT_URL + image_path, image_local_path)
+	ok = await ContentDownloader.download(_content_url + image_path, image_local_path)
 	if not ok:
 		return null
 	

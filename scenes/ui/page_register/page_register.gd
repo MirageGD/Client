@@ -8,7 +8,7 @@ const MIN_ACCOUNT_NAME_LENGTH := 5
 @onready var _edit_repeat_password: LineEdit = %RepeatPasswordLineEdit
 @onready var _button_register: Button = %RegisterButton
 @onready var _http: HTTPRequest = %HTTP
-@onready var _register_url: String = ProjectSettings.get_setting("mirage/server/address") + "register"
+@onready var _register_url: String = ProjectSettings.get_setting("mirage/server/address") + "api/v1/register"
 
 func _ready() -> void:
 	_set_enabled(true)

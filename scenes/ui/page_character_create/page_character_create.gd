@@ -7,7 +7,7 @@ const MIN_CHARACTER_NAME_LENGTH: int = 5
 @onready var _button_create: Button = %ButtonCreate
 @onready var _button_cancel: Button = %ButtonCancel
 @onready var _http: HTTPRequest = %HTTP
-@onready var _characters_url: String = ProjectSettings.get_setting("mirage/server/address") + "characters"
+@onready var _characters_url: String = ProjectSettings.get_setting("mirage/server/address") + "api/v1/characters"
 
 func _ready() -> void:
 	_set_enabled(true)
