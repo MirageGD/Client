@@ -276,7 +276,14 @@ func in_bounds(coords: Vector2i) -> bool:
 	return coords.x >= 0 and coords.y >= 0 and coords.x < map_width and coords.y < map_height
 
 func get_tile_type(coords: Vector2i) -> int:
-	return _tiles[coords.y * map_width + coords.x] if in_bounds(coords) else TILE_BLOCKED
+	if len(_tiles) == 0:
+		return TILE_BLOCKED
+	
+	var index := coords.y * map_width + coords.x
+	if index >= len(_tiles):
+		return TILE_BLOCKED
+	
+	return _tiles[index] if in_bounds(coords) else TILE_BLOCKED
 
 func is_passable(coords: Vector2i) -> bool:
 	return get_tile_type(coords) != TILE_BLOCKED
