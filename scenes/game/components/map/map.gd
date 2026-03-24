@@ -15,12 +15,15 @@ signal map_loaded
 
 var _tileset_cache: Dictionary = {}
 var _tiles: Array[int]
+var _objects: Array[MapObject]
 
 var map_width := 0
 var map_height := 0
+var tile_size := Vector2i(32, 32)
 
 func clear() -> void:
-	pass
+	_tiles.clear()
+	_objects.clear()
 
 func load_map(map_name: String) -> void:
 	clear()
@@ -52,11 +55,12 @@ func _build_map(map_path: String, map_data: Dictionary) -> void:
 	
 	_tiles.resize(map_width * map_height)
 	
-	var tile_w: int = map_data.get("tilewidth", 32)
-	var tile_h: int = map_data.get("tileheight", 32)
-	var tile_size = Vector2i(tile_w, tile_h)
-	var tile_set = _build_tile_set(tile_size, gid_table)
-
+	var tile_width = map_data.get("tilewidth", 32)
+	var tile_height = map_data.get("tileheight", 32)
+	
+	tile_size = Vector2i(tile_width, tile_height)
+	
+	var tile_set = _build_tile_set(gid_table)
 	var layer_z_index := 0
 	
 	for layer_data in map_data.get("layers", []):
@@ -75,6 +79,7 @@ func _build_map(map_path: String, map_data: Dictionary) -> void:
 				var layer_name: String = layer_data.get("name", "")
 				if layer_name.to_lower() == "entities":
 					layer_z_index = 50
+				_load_objects(layer_data)
 
 func _build_meta(layer_data: Dictionary, gid_table: Array[Dictionary]) -> void:
 	var layer_gids: Array = layer_data.get("data", [])
@@ -92,7 +97,26 @@ func _build_meta(layer_data: Dictionary, gid_table: Array[Dictionary]) -> void:
 		
 		_tiles[i] = local_gid
 
-func _build_tile_set(tile_size: Vector2i, gid_table: Array[Dictionary]) -> TileSet:
+func _load_objects(layer_data: Dictionary) -> void:
+	var objects: Array = layer_data.get("objects", [])
+	for object in objects:
+		var type: String = object.get("type", "")
+		if type.is_empty():
+			continue
+		
+		var x = object.get("x", 0) / tile_size.x
+		var y = object.get("y", 0) / tile_size.y
+		var width = object.get("width", 0) / tile_size.x
+		var height = object.get("height", 0) / tile_size.y
+		
+		var map_object := MapObject.new()
+		
+		map_object.type = type.to_lower()
+		map_object.region_rect = Rect2i(x, y, width, height)
+		
+		_objects.append(map_object)
+
+func _build_tile_set(gid_table: Array[Dictionary]) -> TileSet:
 	var tileset := TileSet.new()
 	
 	tileset.tile_size = tile_size
@@ -254,3 +278,13 @@ func get_tile_type(coords: Vector2i) -> int:
 
 func is_passable(coords: Vector2i) -> bool:
 	return get_tile_type(coords) != TILE_BLOCKED
+
+func has_object_of_type_at(type: String, tile_coords: Vector2i) -> bool:
+	for object in _objects:
+		if not object.region_rect.has_point(tile_coords):
+			continue
+		
+		if object.type == type:
+			return true
+	
+	return false

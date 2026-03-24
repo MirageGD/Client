@@ -18,6 +18,7 @@ var current_direction := "down"
 var current_tile := Vector2i.ZERO
 var map: Map
 var tile_checker: Callable
+var tile_size := Vector2i(32, 32)
 var sprite_path: String
 
 var _move_tween: Tween
@@ -30,7 +31,8 @@ func _ready() -> void:
 	_return_idle()
 	if is_local_player:
 		_camera.enabled = true
-		map.map_loaded.connect(func() -> void: 
+		map.map_loaded.connect(func() -> void:
+			tile_size = map.tile_size
 			_update_camera())
 	await _load_sprite()
 
@@ -55,9 +57,9 @@ func _load_sprite() -> void:
 
 func _update_camera() -> void:
 	_camera.limit_left = 0
-	_camera.limit_right = map.map_width * 32
+	_camera.limit_right = map.map_width * tile_size.x
 	_camera.limit_top = 0
-	_camera.limit_bottom = map.map_height * 32
+	_camera.limit_bottom = map.map_height * tile_size.y
 
 func _process(_delta: float) -> void:
 	if not is_local_player:
@@ -97,8 +99,8 @@ func _attack(direction: String) -> void:
 	_animation_player.play(animation_name)
 
 func _get_tile_coords(coords: Vector2) -> Vector2i:
-	var tile_x := int(coords.x / 32)
-	var tile_y := int(coords.y / 32)
+	var tile_x := int(coords.x / tile_size.x)
+	var tile_y := int(coords.y / tile_size.y)
 	return Vector2i(tile_x, tile_y)
 
 func _move_local(direction: String) -> void:
@@ -132,7 +134,12 @@ func _move_local(direction: String) -> void:
 	
 	_can_move = true
 	
+	_check_for_warp(target_tile)
 	_return_idle()
+
+func _check_for_warp(tile_coords: Vector2i) -> void:
+	if map and map.has_object_of_type_at("warp", tile_coords):
+		Network.send_warp_request()
 
 func _return_idle() -> void:
 	_animation_player.play("idle_" + current_direction)
@@ -158,10 +165,10 @@ func _get_move_target(source_tile: Vector2i, direction: String) -> Vector2:
 
 func _get_direction_vector(direction: String) -> Vector2:
 	match direction:
-		"up": return Vector2(0, -32)
-		"down": return Vector2(0, 32)
-		"left": return Vector2(-32, 0)
-		"right": return Vector2(32, 0)
+		"up": return Vector2(0, -tile_size.y)
+		"down": return Vector2(0, tile_size.y)
+		"left": return Vector2(-tile_size.x, 0)
+		"right": return Vector2(tile_size.x, 0)
 		_: return Vector2.ZERO
 
 func _move_to(target: Vector2):
@@ -169,7 +176,7 @@ func _move_to(target: Vector2):
 		return
 	
 	@warning_ignore("integer_division")
-	current_tile = Vector2i(int(target.x) / 32, int(target.y) / 32)
+	current_tile = Vector2i(int(target.x) / tile_size.x, int(target.y) / tile_size.y)
 	
 	if _move_tween and _move_tween.is_running():
 		_move_tween.stop()

@@ -95,3 +95,8 @@ func send_chat_message(chat_message: String) -> void:
 		"type": "chat",
 		"message": chat_message
 	})
+
+func send_warp_request() -> void:
+	send({
+		"type": "warp"
+	})
