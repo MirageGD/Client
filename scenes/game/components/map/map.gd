@@ -24,6 +24,8 @@ var tile_size := Vector2i(32, 32)
 func clear() -> void:
 	_tiles.clear()
 	_objects.clear()
+	for tile_layer in _layers.get_children():
+		tile_layer.queue_free()
 
 func load_map(map_name: String) -> void:
 	clear()
