@@ -1,70 +1,82 @@
-extends Node
+extends Node2D
+class_name Map
 
 const CONTENT_URL := "http://127.0.0.1:5000/content/"
 const CONTENT_CACHE_DIR := "user://content_cache/"
 
-var _tileset_cache: Dictionary = {}
+enum {
+	TILE_PASSABLE = 0,
+	TILE_BLOCKED = 1
+}
 
-func load_map(map_name: String) -> Array:
+signal map_loaded
+
+@onready var _layers: Node2D = %Layers
+
+var _tileset_cache: Dictionary = {}
+var _tiles: Array[int]
+
+var map_width := 0
+var map_height := 0
+
+func clear() -> void:
+	pass
+
+func load_map(map_name: String) -> void:
+	clear()
+	
 	var local_path := CONTENT_CACHE_DIR.path_join(map_name)
 	var ok := await ContentDownloader.download(CONTENT_URL + map_name, local_path)
 	if not ok:
-		push_error("[Map Loader] failed to download map '%s'" % map_name)
-		return [null, []]
+		push_error("[Map] failed to download map '%s'" % map_name)
+		return
 	
 	var map_data_json := FileAccess.get_file_as_string(local_path)
 	var map_data: Variant = JSON.parse_string(map_data_json)
 	if not map_data is Dictionary:
 		push_error("[Map Loader] invalid JSON in '%s'" % local_path)
-		return [null, []]
+		return
 	
-	return await _build_map(map_name.get_base_dir(), map_data)
+	await _build_map(map_name.get_base_dir(), map_data)
+	
+	map_loaded.emit()
 
-func _build_map(map_path: String, map_data: Dictionary) -> Array:
-	var root = Node2D.new()
-	
-	root.name = "Map"
-	
+func _build_map(map_path: String, map_data: Dictionary) -> void:
 	var gid_table := await _resolve_tilesets(map_path, map_data)
 	if gid_table.is_empty():
 		push_error("[Map Loader] no tilesets resolved")
-		return root
+		return
 	
-	var map_width: int = map_data.get("width", 0)
-	var map_height: int = map_data.get("height", 0)
+	map_width = map_data.get("width", 0)
+	map_height = map_data.get("height", 0)
+	
+	_tiles.resize(map_width * map_height)
 	
 	var tile_w: int = map_data.get("tilewidth", 32)
 	var tile_h: int = map_data.get("tileheight", 32)
 	var tile_size = Vector2i(tile_w, tile_h)
 	var tile_set = _build_tile_set(tile_size, gid_table)
-	var tile_types: Array[int] = []
-	
-	tile_types.resize(map_width * map_height)
-	
-	var z_index := 0
+
+	var layer_z_index := 0
 	
 	for layer_data in map_data.get("layers", []):
 		match layer_data.get("type", ""):
 			"tilelayer":
 				var layer_name: String = layer_data.get("name", "")
 				if layer_name.begins_with("@"):
-					_build_meta(layer_data, tile_types, gid_table)
+					_build_meta(layer_data, gid_table)
 					continue
 				
 				var tile_map_layer := _build_tile_layer(layer_data, tile_set, gid_table)
-				tile_map_layer.z_index = z_index
-				root.add_child(tile_map_layer)
+				tile_map_layer.z_index = layer_z_index
+				_layers.add_child(tile_map_layer)
 			
 			"objectgroup":
 				var layer_name: String = layer_data.get("name", "")
 				if layer_name.to_lower() == "entities":
-					z_index = 50
-	
-	var map_tile_data := MapTileData.new(map_width, map_height, tile_types)
-	
-	return [root, map_tile_data]
+					layer_z_index = 50
 
-func _build_meta(layer_data: Dictionary, tile_types: Array[int], gid_table: Array[Dictionary]) -> void:
+func _build_meta(layer_data: Dictionary, gid_table: Array[Dictionary]) -> void:
 	var layer_gids: Array = layer_data.get("data", [])
 	
 	for i in layer_gids.size():
@@ -78,7 +90,7 @@ func _build_meta(layer_data: Dictionary, tile_types: Array[int], gid_table: Arra
 		if local_gid == 0:
 			continue
 		
-		tile_types[i] = local_gid
+		_tiles[i] = local_gid
 
 func _build_tile_set(tile_size: Vector2i, gid_table: Array[Dictionary]) -> TileSet:
 	var tileset := TileSet.new()
@@ -233,3 +245,12 @@ func _load_texture(path: String) -> ImageTexture:
 		return null
 	
 	return ImageTexture.create_from_image(image)
+
+func in_bounds(coords: Vector2i) -> bool:
+	return coords.x >= 0 and coords.y >= 0 and coords.x < map_width and coords.y < map_height
+
+func get_tile_type(coords: Vector2i) -> int:
+	return _tiles[coords.y * map_width + coords.x] if in_bounds(coords) else TILE_BLOCKED
+
+func is_passable(coords: Vector2i) -> bool:
+	return get_tile_type(coords) != TILE_BLOCKED

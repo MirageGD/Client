@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 SignalBus="*uid://bih4klukqapnw"
 ContentDownloader="*uid://dwglwei0r51cm"
-MapLoader="*uid://dmu7p4ppsuhl4"
 Session="*uid://bhrueihunhk1"
 Network="*uid://dsgnypwh7gihc"
 NetworkParser="*uid://u470afgl0ttv"

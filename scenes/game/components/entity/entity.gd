@@ -15,14 +15,13 @@ var is_local_player := false
 var entity_name: String
 var current_direction := "down"
 var current_tile := Vector2i.ZERO
-var tiles: MapTileData
+var map: Map
 var tile_checker: Callable
 var sprite_path: String
 
 var _move_tween: Tween
 var _can_attack := true
 var _can_move := true
-var _camera_constrained := false
 
 func _ready() -> void:
 	_label_name.text = entity_name
@@ -30,6 +29,8 @@ func _ready() -> void:
 	_return_idle()
 	if is_local_player:
 		_camera.enabled = true
+		map.map_loaded.connect(func() -> void: 
+			_update_camera())
 	await _load_sprite()
 
 func _load_sprite() -> void:
@@ -51,17 +52,16 @@ func _load_sprite() -> void:
 	
 	_sprite.texture = ImageTexture.create_from_image(image)
 
+func _update_camera() -> void:
+	_camera.limit_left = 0
+	_camera.limit_right = map.map_width * 32
+	_camera.limit_top = 0
+	_camera.limit_bottom = map.map_height * 32
+
 func _process(_delta: float) -> void:
 	if not is_local_player:
 		return
-	
-	if not _camera_constrained and tiles:
-		_camera.limit_left = 0
-		_camera.limit_right = tiles.width * 32
-		_camera.limit_top = 0
-		_camera.limit_bottom = tiles.height * 32
-		_camera_constrained = true
-	
+
 	if get_viewport().gui_get_focus_owner() != null:
 		return
 	
@@ -106,7 +106,7 @@ func _move_local(direction: String) -> void:
 		return
 	
 	var target_tile := _get_tile_coords(target)
-	if tiles and (not tiles.is_passable(target_tile) or tile_checker.call(target_tile)):
+	if map and (not map.is_passable(target_tile) or tile_checker.call(target_tile)):
 		if current_direction != direction:
 			change_direction(direction)
 			Network.send_direction(current_direction)

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://d2esvk4hhcrgy"]
+
+[ext_resource type="Script" uid="uid://bbnx2cffav3re" path="res://scenes/game/components/map/map.gd" id="1_fiseb"]
+
+[node name="Map" type="Node2D" unique_id=1321915763]
+script = ExtResource("1_fiseb")
+
+[node name="Layers" type="Node2D" parent="." unique_id=1826621869]
+unique_name_in_owner = true

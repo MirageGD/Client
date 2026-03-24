@@ -2,11 +2,16 @@
 
 [ext_resource type="Script" uid="uid://wvbp583vae3r" path="res://scenes/game/game.gd" id="1_sul5r"]
 [ext_resource type="PackedScene" uid="uid://b4t8g3q2oljmq" path="res://scenes/game/ui/panel_chat/panel_chat.tscn" id="2_7h61r"]
+[ext_resource type="PackedScene" uid="uid://d2esvk4hhcrgy" path="res://scenes/game/components/map/map.tscn" id="2_kelw5"]
 [ext_resource type="PackedScene" uid="uid://ctjbmgj6sipvp" path="res://scenes/game/ui/panel_vitals/panel_vitals.tscn" id="3_0sr1o"]
 
 [node name="Game" type="Node2D" unique_id=1090578033]
 y_sort_enabled = true
 script = ExtResource("1_sul5r")
+
+[node name="Map" parent="." unique_id=1321915763 instance=ExtResource("2_kelw5")]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=1602178758]
 

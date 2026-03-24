@@ -2,9 +2,10 @@ extends Node2D
 
 const ENTITY = preload("uid://bpot3paunt5r")
 
+@onready var _map: Map = %Map
+
 var _player_entity_id: int = -1
 var _entities: Dictionary[int, Entity]
-var _tiles: MapTileData
 
 func is_tile_occupied(coords: Vector2i) -> bool:
 	for entity in _entities.values():
@@ -38,15 +39,11 @@ func _map_init(payload: Dictionary) -> void:
 	if map_path.is_empty():
 		return
 	
-	var result := await MapLoader.load_map(map_path)
-	var map: Node2D = result[0]
+	await _map.load_map(map_path)
 	
-	_tiles = result[1]
 	for entity_id in _entities:
-		_entities[entity_id].tiles = _tiles
+		_entities[entity_id].map = _map
 		_entities[entity_id].tile_checker = Callable(self, "is_tile_occupied")
-	
-	add_child(map)
 	
 	var entities = payload.get("entities", [])
 	if entities is Array:
@@ -67,7 +64,7 @@ func _entity_joined(payload: Dictionary) -> void:
 	entity.entity_name = payload.get("name", "")
 	entity.current_direction = payload.get("direction", "down")
 	entity.current_tile = Vector2i(x, y)
-	entity.tiles = _tiles
+	entity.map = _map
 	entity.tile_checker = Callable(self, "is_tile_occupied")
 	entity.sprite_path = payload.get("sprite", "")
 	
