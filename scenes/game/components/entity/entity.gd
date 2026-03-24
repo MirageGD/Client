@@ -8,6 +8,7 @@ const CONTENT_CACHE_DIR := "user://content_cache/"
 @onready var _camera: Camera2D = %Camera
 @onready var _animation_player: AnimationPlayer = %AnimationPlayer
 @onready var _sound_hurt: AudioStreamPlayer2D = $SoundHurt
+@onready var _sound_level_up: AudioStreamPlayer2D = $SoundLevelUp
 @onready var _floating_text: Node2D = %FloatingText
 @onready var _label_name: Label = %NameLabel
 
@@ -197,3 +198,6 @@ func attack(direction: String) -> void:
 func hurt(damage: int) -> void:
 	_sound_hurt.play()
 	_floating_text.emit(str(damage))
+
+func level_up(_new_level: int) -> void:
+	_sound_level_up.play()

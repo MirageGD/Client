@@ -21,6 +21,7 @@ func _ready() -> void:
 	SignalBus.entity_moved.connect(_entity_moved)
 	SignalBus.entity_attack.connect(_entity_attack)
 	SignalBus.entity_hurt.connect(_entity_hurt)
+	SignalBus.entity_leveled_up.connect(_entity_leveled_up)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -133,3 +134,13 @@ func _entity_hurt(payload: Dictionary) -> void:
 	
 	if _entities.has(entity_id):
 		_entities[entity_id].hurt(damage)
+
+func _entity_leveled_up(payload: Dictionary) -> void:
+	var entity_id: int = payload.get("entity_id", -1)
+	if entity_id == -1:
+		return
+	
+	var level: int = payload.get("level", 0)
+	
+	if _entities.has(entity_id):
+		_entities[entity_id].level_up(level)

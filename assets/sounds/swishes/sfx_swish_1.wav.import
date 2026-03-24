@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://d27od88b8s8c7"
-path="res://.godot/imported/swish-1.wav-809cce328ac0e38607d58cfd127dc375.sample"
+path="res://.godot/imported/sfx_swish_1.wav-760fff470329774b052820d9b934baba.sample"
 
 [deps]
 
-source_file="res://assets/sounds/swishes/swish-1.wav"
-dest_files=["res://.godot/imported/swish-1.wav-809cce328ac0e38607d58cfd127dc375.sample"]
+source_file="res://assets/sounds/swishes/sfx_swish_1.wav"
+dest_files=["res://.godot/imported/sfx_swish_1.wav-760fff470329774b052820d9b934baba.sample"]
 
 [params]
 
