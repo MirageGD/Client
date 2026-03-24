@@ -132,7 +132,11 @@ func _update_list(json: PackedByteArray) -> void:
 			var character_level: int = character.get("level", 1)
 			
 			_characters.append(character_name)
-			_character_list.add_item("%s (level %d)" % [character_name, character_level])
+			_character_list.add_item("%s (lv. %d)" % [character_name, character_level])
+		
+		if _characters.size() > 0:
+			_character_list.select(0)
+			_on_character_selected(0)
 
 func _on_http_list_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if result != OK:

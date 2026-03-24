@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://mo8owxsn7b6u"]
+
+[ext_resource type="FontFile" uid="uid://dgsf2x1sgy0ll" path="res://assets/fonts/fnt_pixel_operator.ttf" id="1_xftbf"]
+
+[resource]
+Label/fonts/font = ExtResource("1_xftbf")
+LineEdit/fonts/font = ExtResource("1_xftbf")
+RichTextLabel/fonts/normal_font = ExtResource("1_xftbf")

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cu4hmfomsyys8"]
 
+[ext_resource type="Theme" uid="uid://dt1mu4le4qtxr" path="res://assets/resources/theme_menu.tres" id="1_4ptxj"]
 [ext_resource type="Script" uid="uid://dkr3yyd38wok4" path="res://scenes/ui/page_character_list/page_character_list.gd" id="1_lxhkt"]
+[ext_resource type="Texture2D" uid="uid://dgmn5jwfx0jgm" path="res://assets/resources/menu_gradient.tres" id="2_lt1dk"]
 
 [node name="PageCharacterList" type="Control" unique_id=2039520943]
 layout_mode = 3
@@ -9,16 +11,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_4ptxj")
 script = ExtResource("1_lxhkt")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1266150620]
+[node name="Background" type="TextureRect" parent="." unique_id=93147999]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("2_lt1dk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1868467369]
 layout_mode = 1
@@ -42,8 +45,7 @@ theme_override_constants/margin_bottom = 25
 [node name="Label" type="Label" parent="VBoxContainer/MarginHeader" unique_id=1020494702]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.76429045, 0.73212045, 1, 1)
-theme_override_font_sizes/font_size = 32
+theme_type_variation = &"HeaderLarge"
 text = "Characters"
 horizontal_alignment = 1
 
@@ -51,10 +53,6 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-theme_override_constants/line_separation = 2
-theme_override_font_sizes/font_size = 14
 
 [node name="MarginRegister" type="MarginContainer" parent="VBoxContainer" unique_id=1112740132]
 layout_mode = 2
@@ -70,7 +68,6 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
 disabled = true
 text = "New
 "
@@ -79,7 +76,6 @@ text = "New
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
 disabled = true
 text = "Delete"
 
@@ -93,7 +89,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 14
 disabled = true
 text = "Select"
 
@@ -102,7 +97,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 30)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 14
 text = "Cancel"
 
 [node name="HTTPList" type="HTTPRequest" parent="." unique_id=583841744]

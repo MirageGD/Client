@@ -401,6 +401,7 @@ position = Vector2(16, 32)
 
 [node name="NameLabel" type="Label" parent="NameLabelAnchor" unique_id=1265907772]
 unique_name_in_owner = true
+z_index = 60
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

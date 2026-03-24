@@ -1,6 +1,36 @@
 [gd_scene format=3 uid="uid://b4t8g3q2oljmq"]
 
+[ext_resource type="Theme" uid="uid://mo8owxsn7b6u" path="res://assets/resources/theme_ui.tres" id="1_8ass1"]
 [ext_resource type="Script" uid="uid://iuxmvor155sc" path="res://scenes/game/ui/panel_chat/panel_chat.gd" id="1_bj4ne"]
+[ext_resource type="Texture2D" uid="uid://4m0bpvmmrc1j" path="res://assets/textures/ui/panel_frame.png" id="3_yxn0h"]
+[ext_resource type="Texture2D" uid="uid://drvpx6gc63oxk" path="res://assets/textures/ui/panel_background.png" id="4_arddm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_arddm"]
+texture = ExtResource("3_yxn0h")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ligki"]
+texture = ExtResource("4_arddm")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_arddm"]
+content_margin_left = 6.0
+content_margin_top = 3.0
+content_margin_right = 6.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxn0h"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 0.3764706)
 
 [node name="PanelChat" type="MarginContainer" unique_id=373542897]
 custom_minimum_size = Vector2(400, 200)
@@ -10,6 +40,7 @@ anchor_bottom = 1.0
 offset_top = -210.0
 offset_right = 410.0
 grow_vertical = 0
+theme = ExtResource("1_8ass1")
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -18,35 +49,30 @@ script = ExtResource("1_bj4ne")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1997157048]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_arddm")
+
+[node name="PanelBackground" type="PanelContainer" parent="PanelContainer" unique_id=1085864297]
+modulate = Color(1, 1, 1, 0.7058824)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ligki")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=159303726]
 layout_mode = 2
 
-[node name="MarginChatMessages" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=2044958258]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 3
-
-[node name="ChatMessages" type="RichTextLabel" parent="PanelContainer/VBoxContainer/MarginChatMessages" unique_id=881792761]
+[node name="ChatMessages" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=881792761]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-theme_override_font_sizes/bold_italics_font_size = 12
-theme_override_font_sizes/italics_font_size = 12
-theme_override_font_sizes/mono_font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_arddm")
 scroll_following = true
 
 [node name="ChatLineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer" unique_id=1108393067]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxn0h")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yxn0h")
 placeholder_text = "Press Return to chat."
 
 [connection signal="focus_exited" from="PanelContainer/VBoxContainer/ChatLineEdit" to="." method="_on_chat_line_focus_exited"]

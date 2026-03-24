@@ -1,0 +1,32 @@
+[gd_resource type="Theme" format=3 uid="uid://dt1mu4le4qtxr"]
+
+[ext_resource type="FontFile" uid="uid://dgsf2x1sgy0ll" path="res://assets/fonts/fnt_pixel_operator.ttf" id="1_06jtu"]
+[ext_resource type="Texture2D" uid="uid://ctqyxxrds77xl" path="res://assets/textures/ui/ui_panel_back.png" id="2_layk7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jjedj"]
+texture = ExtResource("2_layk7")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[resource]
+Button/fonts/font = ExtResource("1_06jtu")
+HeaderLarge/colors/font_color = Color(0.70657456, 0.48925805, 0.09934432, 1)
+HeaderLarge/colors/font_shadow_color = Color(0.20757374, 0.12391446, 0.009388084, 1)
+HeaderLarge/constants/shadow_offset_x = 0
+HeaderLarge/constants/shadow_offset_y = 4
+HeaderLarge/font_sizes/font_size = 48
+ItemList/colors/font_color = Color(0.15955389, 0.10869626, 0.021551386, 1)
+ItemList/colors/font_hovered_color = Color(0.16078432, 0.10980392, 0.019607844, 1)
+ItemList/colors/font_hovered_selected_color = Color(0.16078432, 0.10980392, 0.019607844, 1)
+ItemList/colors/font_selected_color = Color(0.16078432, 0.10980392, 0.019607844, 1)
+ItemList/constants/h_separation = 10
+ItemList/constants/line_separation = 2
+ItemList/constants/v_separation = 10
+ItemList/font_sizes/font_size = 32
+ItemList/fonts/font = ExtResource("1_06jtu")
+ItemList/styles/panel = SubResource("StyleBoxTexture_jjedj")
+Label/fonts/font = ExtResource("1_06jtu")
+LineEdit/fonts/font = ExtResource("1_06jtu")
+LinkButton/fonts/font = ExtResource("1_06jtu")

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dj2mwcdedm34p"]
 
 [ext_resource type="Script" uid="uid://d1olra6l52yrh" path="res://scenes/ui/page_character_create/page_character_create.gd" id="1_65syl"]
+[ext_resource type="Theme" uid="uid://dt1mu4le4qtxr" path="res://assets/resources/theme_menu.tres" id="1_essrv"]
+[ext_resource type="Texture2D" uid="uid://dgmn5jwfx0jgm" path="res://assets/resources/menu_gradient.tres" id="3_w0oeg"]
 
 [node name="PageCharacterCreate" type="Control" unique_id=1188645071]
 layout_mode = 3
@@ -9,16 +11,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_essrv")
 script = ExtResource("1_65syl")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1744130738]
+[node name="Background" type="TextureRect" parent="." unique_id=2067423830]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("3_w0oeg")
 metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1248552341]
@@ -43,8 +46,7 @@ theme_override_constants/margin_bottom = 25
 [node name="Label" type="Label" parent="VBoxContainer/MarginHeader" unique_id=1006867381]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.76429045, 0.73212045, 1, 1)
-theme_override_font_sizes/font_size = 32
+theme_type_variation = &"HeaderLarge"
 text = "Create Character"
 horizontal_alignment = 1
 
@@ -55,7 +57,6 @@ theme_override_constants/separation = 8
 [node name="CharacterNameLabel" type="Label" parent="VBoxContainer/HBoxContainerEmail" unique_id=463539074]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
 text = "Character Name"
 horizontal_alignment = 2
 
@@ -64,7 +65,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 14
 max_length = 25
 editable = false
 
@@ -80,7 +80,6 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 30)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
 disabled = true
 text = "Create"
 
@@ -88,7 +87,6 @@ text = "Create"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 30)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
 text = "Cancel"
 
 [node name="HTTP" type="HTTPRequest" parent="." unique_id=1117630381]
