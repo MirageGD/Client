@@ -62,9 +62,9 @@ func _on_register_ok(json: PackedByteArray) -> void:
 		if token.is_empty():
 			_on_error("Received empty token from server")
 			return
-		SignalBus.critical_error.emit("Your account has been created.")
 		
-		queue_free()
+		SignalBus.goto_login.emit()
+		SignalBus.critical_error.emit("Your account has been created.")
 		return
 	
 	_on_error("Received bad response from server.")
