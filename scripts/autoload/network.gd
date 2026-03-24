@@ -50,8 +50,6 @@ func _process(_delta: float) -> void:
 			_parse_packet(data)
 
 func _parse_packet(data: String) -> void:
-	print_debug("Received: %s" % data)
-	
 	var json = JSON.parse_string(data)
 	if json is Dictionary:
 		var type: String = json.get("type", "")
