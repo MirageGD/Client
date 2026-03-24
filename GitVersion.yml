@@ -1,0 +1,3 @@
+workflow: GitHubFlow/v1
+mode: ContinuousDelivery
+tagPrefix: 'v'

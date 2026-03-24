@@ -31,7 +31,7 @@ func load_map(map_name: String) -> void:
 	clear()
 	
 	var local_path := CONTENT_CACHE_DIR.path_join(map_name)
-	var ok := await ContentDownloader.download(CONTENT_URL + map_name, local_path)
+	var ok: bool = await ContentDownloader.download(CONTENT_URL + map_name, local_path)
 	if not ok:
 		push_error("[Map] failed to download map '%s'" % map_name)
 		return
@@ -216,7 +216,7 @@ func _get_tileset(map_path: String, tileset_source: String) -> Variant:
 	
 	var tileset_path := map_path.path_join(tileset_source).simplify_path()
 	var tileset_local_path := CONTENT_CACHE_DIR.path_join(tileset_path)
-	var ok := await ContentDownloader.download(CONTENT_URL + tileset_path, tileset_local_path)
+	var ok: bool = await ContentDownloader.download(CONTENT_URL + tileset_path, tileset_local_path)
 	if not ok:
 		return null
 	
