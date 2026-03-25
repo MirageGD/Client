@@ -11,6 +11,7 @@ const CONTENT_CACHE_DIR := "user://content_cache/"
 @onready var _floating_text: Node2D = %FloatingText
 @onready var _label_name: Label = %NameLabel
 @onready var _content_url: String = ProjectSettings.get_setting("mirage/server/address") + "content/"
+@onready var _audio_listener: AudioListener2D = %AudioListener2D
 
 var is_local_player := false
 var entity_name: String
@@ -30,6 +31,7 @@ func _ready() -> void:
 	change_direction(current_direction)
 	_return_idle()
 	if is_local_player:
+		_audio_listener.make_current()
 		_camera.enabled = true
 		map.map_loaded.connect(func() -> void:
 			tile_size = map.tile_size

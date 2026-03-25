@@ -387,9 +387,11 @@ position = Vector2(16, 16)
 volume_db = -0.7
 
 [node name="SoundHurt" type="AudioStreamPlayer2D" parent="." unique_id=447362420]
+position = Vector2(16, 16)
 stream = ExtResource("4_cvgpe")
 
 [node name="SoundLevelUp" type="AudioStreamPlayer2D" parent="." unique_id=926610685]
+position = Vector2(16, 16)
 stream = ExtResource("5_jiycs")
 
 [node name="FloatingText" parent="." unique_id=588461085 instance=ExtResource("5_upp8v")]
@@ -413,3 +415,7 @@ size_flags_horizontal = 4
 text = "Entity Name"
 label_settings = SubResource("LabelSettings_cvgpe")
 horizontal_alignment = 1
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1022095323]
+unique_name_in_owner = true
+position = Vector2(16, 8)
