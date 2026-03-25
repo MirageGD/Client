@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bpot3paunt5r"]
 
 [ext_resource type="Script" uid="uid://catggo0ge0cxy" path="res://scenes/game/components/entity/entity.gd" id="1_ea4dw"]
-[ext_resource type="Texture2D" uid="uid://bohbx7dmv24hy" path="res://assets/textures/sprite.png" id="2_wnqtv"]
 [ext_resource type="AudioStream" uid="uid://83o6xeo0v027" path="res://assets/sounds/sfx_blow.wav" id="4_cvgpe"]
 [ext_resource type="AudioStream" uid="uid://4cxndxbjkpdu" path="res://assets/sounds/swishes/swish_randomizer.tres" id="4_nj7uu"]
 [ext_resource type="AudioStream" uid="uid://b2m4tnm4mmhdf" path="res://assets/sounds/sfx_level_up.wav" id="5_jiycs"]
@@ -367,7 +366,6 @@ script = ExtResource("1_ea4dw")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2141421264]
 unique_name_in_owner = true
-texture = ExtResource("2_wnqtv")
 centered = false
 hframes = 2
 vframes = 4
