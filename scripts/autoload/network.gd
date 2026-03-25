@@ -100,3 +100,9 @@ func send_warp_request() -> void:
 	send({
 		"type": "warp"
 	})
+
+func send_use_stat_point(stat: String) -> void:
+	send({
+		"type": "use_stat_point",
+		"stat": stat
+	})

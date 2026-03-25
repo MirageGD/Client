@@ -3,6 +3,7 @@ extends Node2D
 const ENTITY = preload("uid://bpot3paunt5r")
 
 @onready var _map: Map = %Map
+@onready var _gui: CanvasLayer = $GUI
 
 var _player_entity_id: int = -1
 var _entities: Dictionary[int, Entity]
@@ -144,3 +145,11 @@ func _entity_leveled_up(payload: Dictionary) -> void:
 	
 	if _entities.has(entity_id):
 		_entities[entity_id].level_up(level)
+
+@onready var _win_character: WindowBase = %WindowCharacter
+
+func _on_panel_menubar_toggle_character() -> void:
+	_win_character.visible = not _win_character.visible
+
+func _on_window_character_close() -> void:
+	_win_character.visible = false

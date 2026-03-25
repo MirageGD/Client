@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dxirap74d8o0o"]
+
+[ext_resource type="Script" uid="uid://c1711yaevuv5v" path="res://scenes/game/ui/panel_menubar/panel_menubar.gd" id="1_e2dsv"]
+[ext_resource type="Texture2D" uid="uid://4m0bpvmmrc1j" path="res://assets/textures/ui/panel_frame.png" id="2_pyskc"]
+[ext_resource type="Texture2D" uid="uid://crasiiirtwpjm" path="res://assets/textures/icons/ico_character.png" id="3_84y25"]
+[ext_resource type="Texture2D" uid="uid://8t2op776a4jj" path="res://assets/textures/icons/ico_system.png" id="4_3jg7s"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1coxj"]
+texture = ExtResource("2_pyskc")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[node name="PanelMenubar" type="MarginContainer" unique_id=1335960819]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -106.0
+offset_top = -62.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_e2dsv")
+
+[node name="Frame" type="PanelContainer" parent="." unique_id=129262338]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1coxj")
+
+[node name="Buttons" type="HBoxContainer" parent="Frame" unique_id=573842724]
+layout_mode = 2
+
+[node name="ButtonCharacter" type="Button" parent="Frame/Buttons" unique_id=973145174]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+icon = ExtResource("3_84y25")
+
+[node name="ButtonInventory" type="Button" parent="Frame/Buttons" unique_id=2063630435]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+icon = ExtResource("4_3jg7s")
+
+[connection signal="pressed" from="Frame/Buttons/ButtonCharacter" to="." method="_on_button_character_pressed"]

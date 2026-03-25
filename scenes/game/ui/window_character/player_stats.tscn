@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://cj2e7dvila3j3"]
+
+[ext_resource type="Script" uid="uid://bamrdxvrurn7a" path="res://scenes/game/ui/window_character/player_stats.gd" id="1_1qydg"]
+
+[node name="PlayerStats" type="VBoxContainer" unique_id=1108783800]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_1qydg")
+
+[node name="HBoxStrength" type="HBoxContainer" parent="." unique_id=667905563]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxStrength" unique_id=1799524968]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Strength"
+horizontal_alignment = 2
+
+[node name="LabelStrength" type="Label" parent="HBoxStrength" unique_id=946011443]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="ButtonStrength" type="Button" parent="HBoxStrength" unique_id=2100763510]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+text = "+"
+
+[node name="HBoxStamina" type="HBoxContainer" parent="." unique_id=1564829564]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxStamina" unique_id=1508275575]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stamina"
+horizontal_alignment = 2
+
+[node name="LabelStamina" type="Label" parent="HBoxStamina" unique_id=952301074]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="ButtonStamina" type="Button" parent="HBoxStamina" unique_id=928811219]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+text = "+"
+
+[node name="HBoxIntelligence" type="HBoxContainer" parent="." unique_id=1955858559]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxIntelligence" unique_id=1390928498]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Intelligence"
+horizontal_alignment = 2
+
+[node name="LabelIntelligence" type="Label" parent="HBoxIntelligence" unique_id=746546144]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+
+[node name="ButtonIntelligence" type="Button" parent="HBoxIntelligence" unique_id=873303051]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+text = "+"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=492062706]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 20
+
+[node name="LabelStatPoints" type="Label" parent="MarginContainer" unique_id=1651018055]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "You have 4 points to distribute"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="HBoxStrength/ButtonStrength" to="." method="_on_button_strength_pressed"]
+[connection signal="pressed" from="HBoxStamina/ButtonStamina" to="." method="_on_button_stamina_pressed"]
+[connection signal="pressed" from="HBoxIntelligence/ButtonIntelligence" to="." method="_on_button_intelligence_pressed"]

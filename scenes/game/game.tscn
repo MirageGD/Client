@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b4t8g3q2oljmq" path="res://scenes/game/ui/panel_chat/panel_chat.tscn" id="2_7h61r"]
 [ext_resource type="PackedScene" uid="uid://d2esvk4hhcrgy" path="res://scenes/game/components/map/map.tscn" id="2_kelw5"]
 [ext_resource type="PackedScene" uid="uid://ctjbmgj6sipvp" path="res://scenes/game/ui/panel_vitals/panel_vitals.tscn" id="3_0sr1o"]
+[ext_resource type="PackedScene" uid="uid://dxirap74d8o0o" path="res://scenes/game/ui/panel_menubar/panel_menubar.tscn" id="5_lfrn8"]
+[ext_resource type="PackedScene" uid="uid://dmy4xtcyhj78e" path="res://scenes/game/ui/window_character/window_character.tscn" id="6_5i0tg"]
 
 [node name="Game" type="Node2D" unique_id=1090578033]
 y_sort_enabled = true
@@ -19,3 +21,25 @@ metadata/_edit_lock_ = true
 offset_top = -200.0
 
 [node name="PanelVitals" parent="GUI" unique_id=1654518891 instance=ExtResource("3_0sr1o")]
+
+[node name="PanelMenubar" parent="GUI" unique_id=1335960819 instance=ExtResource("5_lfrn8")]
+
+[node name="Windows" type="CanvasLayer" parent="." unique_id=1843892941]
+
+[node name="WindowCharacter" parent="Windows" unique_id=569889133 instance=ExtResource("6_5i0tg")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -125.0
+offset_right = 130.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="toggle_character" from="GUI/PanelMenubar" to="." method="_on_panel_menubar_toggle_character"]
+[connection signal="close" from="Windows/WindowCharacter" to="." method="_on_window_character_close"]

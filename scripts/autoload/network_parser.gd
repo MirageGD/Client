@@ -18,5 +18,6 @@ func _message(type: String, payload: Dictionary) -> void:
 		"entity_moved": SignalBus.entity_moved.emit(payload)
 		
 		"player_xp": SignalBus.player_xp.emit(payload)
+		"player_stats": SignalBus.player_stats.emit(payload)
 		
 		"chat": SignalBus.chat.emit(payload)

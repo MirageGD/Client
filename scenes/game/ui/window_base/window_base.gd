@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name WindowBase
 
-signal closed
+signal close
 
 @onready var _title_bar: PanelContainer = %Header
 @onready var _title: Label = %Title
@@ -33,5 +33,4 @@ func _input(event: InputEvent) -> void:
 
 func _on_button_close_pressed() -> void:
 	if closable:
-		closed.emit()
-		queue_free()
+		close.emit()

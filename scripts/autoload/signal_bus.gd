@@ -21,5 +21,6 @@ signal entity_leveled_up(payload: Dictionary)
 signal entity_moved(payload: Dictionary)
 
 signal player_xp(payload: Dictionary)
+signal player_stats(payload: Dictionary)
 
 signal chat(payload: Dictionary)
