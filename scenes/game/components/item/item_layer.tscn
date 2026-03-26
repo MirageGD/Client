@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bfaphrk3b7hll"]
+
+[ext_resource type="Script" uid="uid://17rslhewy2t3" path="res://scenes/game/components/item/item_layer.gd" id="1_w25kk"]
+
+[node name="ItemLayer" type="Node2D" unique_id=1637439298]
+script = ExtResource("1_w25kk")

@@ -3,7 +3,8 @@ extends Node2D
 const ENTITY = preload("uid://bpot3paunt5r")
 
 @onready var _map: Map = %Map
-@onready var _gui: CanvasLayer = $GUI
+@onready var _win_character: WindowBase = %WindowCharacter
+@onready var _win_inventory: WindowBase = %WindowInventory
 
 var _player_entity_id: int = -1
 var _entities: Dictionary[int, Entity]
@@ -29,6 +30,12 @@ func _input(event: InputEvent) -> void:
 		var focus_owner := get_viewport().gui_get_focus_owner()
 		if focus_owner != null:
 			focus_owner.release_focus()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("inventory"):
+		_on_panel_menubar_toggle_inventory()
+	elif event.is_action_pressed("character"):
+		_on_panel_menubar_toggle_character()
 
 func _map_init(payload: Dictionary) -> void:
 	for entity_id in _entities:
@@ -146,10 +153,14 @@ func _entity_leveled_up(payload: Dictionary) -> void:
 	if _entities.has(entity_id):
 		_entities[entity_id].level_up(level)
 
-@onready var _win_character: WindowBase = %WindowCharacter
-
 func _on_panel_menubar_toggle_character() -> void:
 	_win_character.visible = not _win_character.visible
 
+func _on_panel_menubar_toggle_inventory() -> void:
+	_win_inventory.visible = not _win_inventory.visible
+
 func _on_window_character_close() -> void:
 	_win_character.visible = false
+
+func _on_window_inventory_close() -> void:
+	_win_inventory.visible = false

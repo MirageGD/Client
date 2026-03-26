@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://dxirap74d8o0o"]
 
 [ext_resource type="Script" uid="uid://c1711yaevuv5v" path="res://scenes/game/ui/panel_menubar/panel_menubar.gd" id="1_e2dsv"]
+[ext_resource type="Theme" uid="uid://mo8owxsn7b6u" path="res://assets/resources/theme_ui.tres" id="1_rdm7p"]
 [ext_resource type="Texture2D" uid="uid://4m0bpvmmrc1j" path="res://assets/textures/ui/panel_frame.png" id="2_pyskc"]
 [ext_resource type="Texture2D" uid="uid://crasiiirtwpjm" path="res://assets/textures/icons/ico_character.png" id="3_84y25"]
 [ext_resource type="Texture2D" uid="uid://8t2op776a4jj" path="res://assets/textures/icons/ico_system.png" id="4_3jg7s"]
+[ext_resource type="Texture2D" uid="uid://d2g1j3r5aru3l" path="res://assets/textures/icons/ico_inventory.png" id="4_rdm7p"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1coxj"]
 texture = ExtResource("2_pyskc")
@@ -22,6 +24,7 @@ offset_left = -106.0
 offset_top = -62.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("1_rdm7p")
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -38,11 +41,19 @@ layout_mode = 2
 [node name="ButtonCharacter" type="Button" parent="Frame/Buttons" unique_id=973145174]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+tooltip_text = "Character (C)"
 icon = ExtResource("3_84y25")
 
 [node name="ButtonInventory" type="Button" parent="Frame/Buttons" unique_id=2063630435]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+tooltip_text = "Inventory (I)"
+icon = ExtResource("4_rdm7p")
+
+[node name="buttonSettings" type="Button" parent="Frame/Buttons" unique_id=1238664628]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 icon = ExtResource("4_3jg7s")
 
 [connection signal="pressed" from="Frame/Buttons/ButtonCharacter" to="." method="_on_button_character_pressed"]
+[connection signal="pressed" from="Frame/Buttons/ButtonInventory" to="." method="_on_button_inventory_pressed"]

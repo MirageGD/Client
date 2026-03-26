@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c840kvw5f81r"]
+
+[ext_resource type="Script" uid="uid://p2mlqjfvacbh" path="res://scenes/game/components/item/item.gd" id="1_d7d8i"]
+
+[node name="Item" type="Sprite2D" unique_id=1560092906]
+centered = false
+offset = Vector2(0, 8)
+script = ExtResource("1_d7d8i")

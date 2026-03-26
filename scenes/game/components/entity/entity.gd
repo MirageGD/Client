@@ -1,7 +1,7 @@
 extends Node2D
 class_name Entity
 
-const CONTENT_CACHE_DIR := "user://content_cache/"
+const ITEM_PICKUP_DELAY := 0.25
 
 @onready var _sprite: Sprite2D = %Sprite
 @onready var _camera: Camera2D = %Camera
@@ -10,7 +10,6 @@ const CONTENT_CACHE_DIR := "user://content_cache/"
 @onready var _sound_level_up: AudioStreamPlayer2D = $SoundLevelUp
 @onready var _floating_text: Node2D = %FloatingText
 @onready var _label_name: Label = %NameLabel
-@onready var _content_url: String = ProjectSettings.get_setting("mirage/server/address") + "content/"
 @onready var _audio_listener: AudioListener2D = %AudioListener2D
 
 var is_local_player := false
@@ -25,6 +24,7 @@ var sprite_path: String
 var _move_tween: Tween
 var _can_attack := true
 var _can_move := true
+var _can_pickup := true
 
 func _ready() -> void:
 	_label_name.text = entity_name
@@ -33,7 +33,7 @@ func _ready() -> void:
 	if is_local_player:
 		_audio_listener.make_current()
 		_camera.enabled = true
-		map.map_loaded.connect(func() -> void:
+		SignalBus.map_loaded.connect(func(_map: Map) -> void:
 			tile_size = map.tile_size
 			_update_camera())
 	await _load_sprite()
@@ -42,10 +42,8 @@ func _load_sprite() -> void:
 	if sprite_path.is_empty():
 		return
 	
-	var sprite_local_path := CONTENT_CACHE_DIR.path_join(sprite_path)
-	var sprite_url := _content_url + sprite_path
-	
-	if not await ContentDownloader.download(sprite_url, sprite_local_path):
+	var sprite_local_path := ContentDownloader.get_local_path(sprite_path)
+	if not await ContentDownloader.download(sprite_path, sprite_local_path):
 		return
 	
 	var image = Image.new()
@@ -70,6 +68,8 @@ func _process(_delta: float) -> void:
 	if get_viewport().gui_get_focus_owner() != null:
 		return
 	
+	_try_pickup()
+	
 	if _can_move and _can_attack:
 		if Input.is_action_pressed("attack"):
 			_attack_local()
@@ -81,6 +81,18 @@ func _process(_delta: float) -> void:
 			_move_local("left")
 		elif Input.is_action_pressed("move_right"):
 			_move_local("right")
+
+func _try_pickup() -> void:
+	if not _can_pickup or not Input.is_action_pressed("pickup"):
+		return
+	
+	_can_pickup = false
+	
+	Network.send_item_pickup()
+	
+	await get_tree().create_timer(ITEM_PICKUP_DELAY).timeout
+	
+	_can_pickup = true
 
 func _attack_local() -> void:
 	_can_attack = false

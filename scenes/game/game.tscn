@@ -4,8 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://b4t8g3q2oljmq" path="res://scenes/game/ui/panel_chat/panel_chat.tscn" id="2_7h61r"]
 [ext_resource type="PackedScene" uid="uid://d2esvk4hhcrgy" path="res://scenes/game/components/map/map.tscn" id="2_kelw5"]
 [ext_resource type="PackedScene" uid="uid://ctjbmgj6sipvp" path="res://scenes/game/ui/panel_vitals/panel_vitals.tscn" id="3_0sr1o"]
+[ext_resource type="PackedScene" uid="uid://bfaphrk3b7hll" path="res://scenes/game/components/item/item_layer.tscn" id="3_bdhmt"]
 [ext_resource type="PackedScene" uid="uid://dxirap74d8o0o" path="res://scenes/game/ui/panel_menubar/panel_menubar.tscn" id="5_lfrn8"]
 [ext_resource type="PackedScene" uid="uid://dmy4xtcyhj78e" path="res://scenes/game/ui/window_character/window_character.tscn" id="6_5i0tg"]
+[ext_resource type="PackedScene" uid="uid://dum6rirqkulym" path="res://scenes/game/ui/window_inventory/window_inventory.tscn" id="8_87uf6"]
 
 [node name="Game" type="Node2D" unique_id=1090578033]
 y_sort_enabled = true
@@ -14,6 +16,8 @@ script = ExtResource("1_sul5r")
 [node name="Map" parent="." unique_id=1321915763 instance=ExtResource("2_kelw5")]
 unique_name_in_owner = true
 metadata/_edit_lock_ = true
+
+[node name="Items" parent="." unique_id=1637439298 instance=ExtResource("3_bdhmt")]
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=1602178758]
 
@@ -41,5 +45,23 @@ offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="WindowInventory" parent="Windows" unique_id=2128890954 instance=ExtResource("8_87uf6")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(370, 220)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -245.0
+offset_top = -267.0
+offset_right = -35.0
+offset_bottom = -87.0
+grow_horizontal = 0
+grow_vertical = 0
+
 [connection signal="toggle_character" from="GUI/PanelMenubar" to="." method="_on_panel_menubar_toggle_character"]
+[connection signal="toggle_inventory" from="GUI/PanelMenubar" to="." method="_on_panel_menubar_toggle_inventory"]
 [connection signal="close" from="Windows/WindowCharacter" to="." method="_on_window_character_close"]
+[connection signal="close" from="Windows/WindowInventory" to="." method="_on_window_inventory_close"]

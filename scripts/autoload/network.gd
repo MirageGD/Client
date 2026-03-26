@@ -106,3 +106,20 @@ func send_use_stat_point(stat: String) -> void:
 		"type": "use_stat_point",
 		"stat": stat
 	})
+
+func send_item_pickup() -> void:
+	send({
+		"type": "item_pickup"
+	})
+
+func send_item_move(from_slot: int, to_slot: int, quantity: int = -1) -> void:
+	var item_move_message: Dictionary = {
+		"type": "item_move",
+		"from_slot": from_slot,
+		"to_slot": to_slot
+	}
+	
+	if quantity > 0:
+		item_move_message["quantity"] = quantity
+	
+	send(item_move_message)

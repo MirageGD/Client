@@ -9,6 +9,7 @@ signal goto_game
 signal critical_error(message: String)
 
 signal map_init(data: Dictionary)
+signal map_loaded(map: Map)
 
 signal entity_attack(payload: Dictionary)
 signal entity_death(payload: Dictionary)
@@ -22,5 +23,10 @@ signal entity_moved(payload: Dictionary)
 
 signal player_xp(payload: Dictionary)
 signal player_stats(payload: Dictionary)
+signal player_inventory(payload: Dictionary)
+signal player_inventory_update(payload: Dictionary)
+
+signal item_added(payload: Dictionary)
+signal item_removed(payload: Dictionary)
 
 signal chat(payload: Dictionary)

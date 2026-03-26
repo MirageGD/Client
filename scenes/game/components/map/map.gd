@@ -1,17 +1,12 @@
 extends Node2D
 class_name Map
 
-const CONTENT_CACHE_DIR := "user://content_cache/"
-
 enum {
 	TILE_PASSABLE = 0,
 	TILE_BLOCKED = 1
 }
 
-signal map_loaded
-
 @onready var _layers: Node2D = %Layers
-@onready var _content_url: String = ProjectSettings.get_setting("mirage/server/address") + "content/"
 
 var _tileset_cache: Dictionary = {}
 var _tiles: Array[int]
@@ -30,8 +25,8 @@ func clear() -> void:
 func load_map(map_name: String) -> void:
 	clear()
 	
-	var local_path := CONTENT_CACHE_DIR.path_join(map_name)
-	var ok: bool = await ContentDownloader.download(_content_url + map_name, local_path)
+	var local_path := ContentDownloader.get_local_path(map_name)
+	var ok: bool = await ContentDownloader.download(map_name, local_path)
 	if not ok:
 		push_error("[Map] failed to download map '%s'" % map_name)
 		return
@@ -44,7 +39,7 @@ func load_map(map_name: String) -> void:
 	
 	await _build_map(map_name.get_base_dir(), map_data)
 	
-	map_loaded.emit()
+	SignalBus.map_loaded.emit(self)
 
 func _build_map(map_path: String, map_data: Dictionary) -> void:
 	var gid_table := await _resolve_tilesets(map_path, map_data)
@@ -215,8 +210,8 @@ func _get_tileset(map_path: String, tileset_source: String) -> Variant:
 		return _tileset_cache[tileset_source]
 	
 	var tileset_path := map_path.path_join(tileset_source).simplify_path()
-	var tileset_local_path := CONTENT_CACHE_DIR.path_join(tileset_path)
-	var ok: bool = await ContentDownloader.download(_content_url + tileset_path, tileset_local_path)
+	var tileset_local_path := ContentDownloader.get_local_path(tileset_path)
+	var ok: bool = await ContentDownloader.download(tileset_path, tileset_local_path)
 	if not ok:
 		return null
 	
@@ -225,9 +220,9 @@ func _get_tileset(map_path: String, tileset_source: String) -> Variant:
 	
 	var image_name: String = tileset_data.get("image", "")
 	var image_path = tileset_path.get_base_dir().path_join(image_name).simplify_path()
-	var image_local_path = CONTENT_CACHE_DIR.path_join(image_path)
+	var image_local_path = ContentDownloader.get_local_path(image_path)
 	
-	ok = await ContentDownloader.download(_content_url + image_path, image_local_path)
+	ok = await ContentDownloader.download(image_path, image_local_path)
 	if not ok:
 		return null
 	

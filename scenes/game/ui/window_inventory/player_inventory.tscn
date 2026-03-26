@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://0es4yudubvyd"]
+
+[ext_resource type="Script" uid="uid://28dh7440pt7d" path="res://scenes/game/ui/window_inventory/player_inventory.gd" id="1_11f21"]
+
+[node name="PlayerInventory" type="VBoxContainer" unique_id=1393502974]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 100.0
+offset_bottom = 100.0
+script = ExtResource("1_11f21")
+
+[node name="Container" type="HFlowContainer" parent="." unique_id=1014625128]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

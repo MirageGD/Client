@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dum6rirqkulym"]
+
+[ext_resource type="PackedScene" uid="uid://cufbddsi0nveo" path="res://scenes/game/ui/window_base/window_base.tscn" id="1_vp6re"]
+[ext_resource type="PackedScene" uid="uid://0es4yudubvyd" path="res://scenes/game/ui/window_inventory/player_inventory.tscn" id="2_0ijy2"]
+
+[node name="WindowInventory" unique_id=569889133 instance=ExtResource("1_vp6re")]
+custom_minimum_size = Vector2(210, 180)
+offset_right = 180.0
+offset_bottom = 180.0
+title = "Inventory"
+
+[node name="PlayerInventory" parent="VBoxContainer/Body" parent_id_path=PackedInt32Array(1295399664) index="0" unique_id=1393502974 instance=ExtResource("2_0ijy2")]
+layout_mode = 2

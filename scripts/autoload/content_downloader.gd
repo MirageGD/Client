@@ -1,7 +1,11 @@
 extends Node
 
+const CONTENT_CACHE_DIR := "user://content_cache/"
 const ETAG_STORE_PATH := "user://content_cache/.etags.json"
-const CACHE_TTL_SECONDS := 300
+
+@onready var _cache_content: bool = ProjectSettings.get_setting("mirage/cache/cache_content", true)
+@onready var _cache_ttl: float = ProjectSettings.get_setting("mirage/cache/time_to_live", 300.0)
+@onready var _base_url: String = ProjectSettings.get_setting("mirage/server/address") + "content/"
 
 var _etag_store: Dictionary = {}
 var _cache: Dictionary = {}
@@ -29,10 +33,15 @@ func _save_etag_store() -> void:
 	file.store_string(etags)
 	file.close()
 
-func download(url: String, dest_path: String) -> bool:
-	if _cache.has(url):
+func get_local_path(source_path: String) -> String:
+	return CONTENT_CACHE_DIR.path_join(source_path)
+
+func download(source_path: String, dest_path: String) -> bool:
+	var url := _base_url + source_path
+	
+	if _cache_content and _cache.has(url):
 		var age: float = Time.get_unix_time_from_system() - _cache[url]
-		if age < CACHE_TTL_SECONDS:
+		if age < _cache_ttl:
 			return true
 	
 	DirAccess.make_dir_recursive_absolute(dest_path.get_base_dir())
