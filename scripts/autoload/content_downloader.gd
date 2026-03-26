@@ -1,8 +1,10 @@
 extends Node
 
 const ETAG_STORE_PATH := "user://content_cache/.etags.json"
+const CACHE_TTL_SECONDS := 300
 
 var _etag_store: Dictionary = {}
+var _cache: Dictionary = {}
 
 func _ready() -> void:
 	_load_etag_store()
@@ -26,8 +28,13 @@ func _save_etag_store() -> void:
 	
 	file.store_string(etags)
 	file.close()
-	
+
 func download(url: String, dest_path: String) -> bool:
+	if _cache.has(url):
+		var age: float = Time.get_unix_time_from_system() - _cache[url]
+		if age < CACHE_TTL_SECONDS:
+			return true
+	
 	DirAccess.make_dir_recursive_absolute(dest_path.get_base_dir())
 	
 	var http := HTTPRequest.new()
@@ -48,6 +55,7 @@ func download(url: String, dest_path: String) -> bool:
 	
 	var status_code: int = result[1]
 	if status_code == 304:
+		_cache[url] = Time.get_unix_time_from_system()
 		return true
 	
 	if status_code != 200:
@@ -69,4 +77,5 @@ func download(url: String, dest_path: String) -> bool:
 			_save_etag_store()
 			break
 	
+	_cache[url] = Time.get_unix_time_from_system()
 	return true
