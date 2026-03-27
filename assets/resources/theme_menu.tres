@@ -12,8 +12,8 @@ texture_margin_bottom = 16.0
 
 [resource]
 Button/fonts/font = ExtResource("1_06jtu")
-HeaderLarge/colors/font_color = Color(0.70657456, 0.48925805, 0.09934432, 1)
-HeaderLarge/colors/font_shadow_color = Color(0.20757374, 0.12391446, 0.009388084, 1)
+HeaderLarge/colors/font_color = Color(0.8804898, 0.72292227, 0.36759055, 1)
+HeaderLarge/colors/font_shadow_color = Color(0.23076132, 0.15940121, 0.04087601, 1)
 HeaderLarge/constants/shadow_offset_x = 0
 HeaderLarge/constants/shadow_offset_y = 4
 HeaderLarge/font_sizes/font_size = 48

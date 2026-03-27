@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cufbddsi0nveo"]
 
 [ext_resource type="Script" uid="uid://b1b1r66ddk8e2" path="res://scenes/game/ui/window_base/window_base.gd" id="1_8ephk"]
-[ext_resource type="Theme" uid="uid://mo8owxsn7b6u" path="res://assets/resources/theme_ui.tres" id="1_lrvwl"]
+[ext_resource type="Theme" uid="uid://chops32wptwq4" path="res://assets/resources/theme_window.tres" id="1_kj7w7"]
 [ext_resource type="Texture2D" uid="uid://btwik05h431ly" path="res://assets/textures/ui/ui_window_title.png" id="2_k8h55"]
 [ext_resource type="Texture2D" uid="uid://1cg5at78nx0m" path="res://assets/textures/ui/ui_window_back.png" id="4_kj7w7"]
 
@@ -21,7 +21,7 @@ texture_margin_bottom = 16.0
 
 [node name="WindowBase" type="PanelContainer" unique_id=569889133]
 custom_minimum_size = Vector2(300, 300)
-theme = ExtResource("1_lrvwl")
+theme = ExtResource("1_kj7w7")
 script = ExtResource("1_8ephk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=584765839]

@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3 uid="uid://chops32wptwq4"]
+
+[ext_resource type="FontFile" uid="uid://dgsf2x1sgy0ll" path="res://assets/fonts/fnt_pixel_operator.ttf" id="1_shjod"]
+
+[resource]
+Label/colors/font_color = Color(0.25869265, 0.1588578, 0.04210311, 1)
+Label/fonts/font = ExtResource("1_shjod")
+LineEdit/fonts/font = ExtResource("1_shjod")
+RichTextLabel/fonts/normal_font = ExtResource("1_shjod")
