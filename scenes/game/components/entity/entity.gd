@@ -33,6 +33,7 @@ func _ready() -> void:
 	if is_local_player:
 		_audio_listener.make_current()
 		_camera.enabled = true
+		_update_camera()
 		SignalBus.map_loaded.connect(func(_map: Map) -> void:
 			tile_size = map.tile_size
 			_update_camera())
@@ -56,6 +57,8 @@ func _load_sprite() -> void:
 	_sprite.texture = ImageTexture.create_from_image(image)
 
 func _update_camera() -> void:
+	if not map:
+		return
 	_camera.limit_left = 0
 	_camera.limit_right = map.map_width * tile_size.x
 	_camera.limit_top = 0
